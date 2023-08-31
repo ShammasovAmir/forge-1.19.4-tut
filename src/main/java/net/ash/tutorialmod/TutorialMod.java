@@ -1,5 +1,6 @@
 package net.ash.tutorialmod;
 
+import net.ash.tutorialmod.block.ModBlocks;
 import net.ash.tutorialmod.item.ModCreativeModTabs;
 import net.ash.tutorialmod.item.ModItems;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -24,6 +25,7 @@ public class TutorialMod {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 
@@ -38,9 +40,13 @@ public class TutorialMod {
 
     private void addCreative(CreativeModeTabEvent.BuildContents event) {
         if (event.getTab() == ModCreativeModTabs.TUTORIAL_TAB) {
+            // Items
             event.accept(ModItems.ZIROCON);
             event.accept(ModItems.BLACK_OPAL);
             event.accept(ModItems.RAW_BLACK_OPAL);
+
+            // Blocks
+            event.accept(ModBlocks.BLACK_OPAL_BLOCK);
         }
     }
 
