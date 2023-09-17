@@ -1,8 +1,11 @@
 package net.ash.tutorialmod;
 
 import net.ash.tutorialmod.block.ModBlocks;
+import net.ash.tutorialmod.entity.ModEntities;
+import net.ash.tutorialmod.entity.client.TigerRenderer;
 import net.ash.tutorialmod.item.ModCreativeModTabs;
 import net.ash.tutorialmod.item.ModItems;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
@@ -27,6 +30,8 @@ public class TutorialMod {
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
 
+        ModEntities.register(modEventBus);
+
         modEventBus.addListener(this::commonSetup);
 
         MinecraftForge.EVENT_BUS.register(this);
@@ -44,6 +49,7 @@ public class TutorialMod {
             event.accept(ModItems.ZIROCON);
             event.accept(ModItems.BLACK_OPAL);
             event.accept(ModItems.RAW_BLACK_OPAL);
+            event.accept(ModItems.TIGER_SPAWN_EGG);
 
             // Blocks
             event.accept(ModBlocks.BLACK_OPAL_BLOCK);
@@ -51,6 +57,14 @@ public class TutorialMod {
             event.accept(ModBlocks.DEEPSLATE_BLACK_OPAL_ORE);
             event.accept(ModBlocks.NETHERRACK_BLACK_OPAL_ORE);
             event.accept(ModBlocks.ENDSTONE_BLACK_OPAL_ORE);
+
+            event.accept(ModBlocks.EBONY_LOG);
+            event.accept(ModBlocks.EBONY_LEAVES);
+            event.accept(ModBlocks.EBONY_PLANKS);
+            event.accept(ModBlocks.EBONY_WOOD);
+            event.accept(ModBlocks.EBONY_SAPLING);
+            event.accept(ModBlocks.STRIPPED_EBONY_LOG);
+            event.accept(ModBlocks.STRIPPED_EBONY_WOOD);
         }
     }
 
@@ -59,7 +73,7 @@ public class TutorialMod {
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-
+            EntityRenderers.register(ModEntities.TIGER.get(), TigerRenderer::new);
         }
     }
 }
